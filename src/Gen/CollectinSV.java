@@ -1,30 +1,24 @@
 package Gen;
 
-import java.io.Serializable;
-import java.rmi.RemoteException;
+
+
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.hyperic.sigar.CpuPerc;
-import org.hyperic.sigar.DiskUsage;
 import org.hyperic.sigar.Mem;
-import org.hyperic.sigar.ProcMem;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 import org.hyperic.sigar.SigarProxy;
-import org.hyperic.sigar.SigarProxyCache;
 
 
 
+//public class CollectinSV implements Serializable, Task<String>{
+public class CollectinSV implements Runnable{	
 
 
-public class CollectinSV implements Serializable, Job{
-	
 	ArrayList<Double> cpu;
 	double mem;
 	private Sigar sigar;
@@ -108,17 +102,72 @@ public class CollectinSV implements Serializable, Job{
 
 
 
+//	@Override
+//	public String executeJob() throws RemoteException {
+//		// TODO Auto-generated method stub
+//		try {
+//			System.out.println("execute in client");
+//			cpu = cpuInfo();
+//			mem = memInfo();
+//		} catch (SigarException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		String temp = cpu.toString()+ " "+ mem;
+//		return temp;
+//	}
+
+
+
+//	@Override
+//	public String execute() {
+//		// TODO Auto-generated method stub
+//		try {
+//			cpu = cpuInfo();
+//			mem = memInfo();
+//			}
+//		catch (SigarException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		String temp = cpu.toString()+ " "+ mem;
+//		return temp;
+//	}
+
+	
+
 	@Override
-	public String executeJob() throws RemoteException {
+	public void run() {
 		// TODO Auto-generated method stub
 		try {
+		//System.out.println("collect info and sending to "+Constants.adminserver);
 			cpu = cpuInfo();
 			mem = memInfo();
-		} catch (SigarException e) {
+			String temp = Constants.formattime()+" "+cpu.toString()+ " "+ mem;
+	//		System.out.println("before sending");
+			ClientSending cs;
+			try {
+				cs = new ClientSending(Constants.adminserver);
+				ClientSending.infoSending(cs.s, temp);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				System.out.println("server is not avaible at the moment");
+			}
+			
+			System.out.println("sending "+ temp);
+			}
+		catch (SigarException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String temp = cpu.toString()+ " "+ mem;
-		return temp;
-	}
+//		String temp = cpu.toString()+ " "+ mem;
+//		System.out.println("temp is "+ temp);
+ catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 }
