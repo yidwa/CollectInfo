@@ -36,6 +36,7 @@ public class ClientSending {
 				bw.write(info);
 				//System.out.println("writing finish");
 				bw.flush();
+				bw.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

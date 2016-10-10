@@ -3,7 +3,7 @@ package Gen;
 import java.time.Instant;
 
 public class Constants {
-	static String adminserver = "115.146.89.197";
+	static String adminserver = "115.146.89.52";
 //	static String adminserver = "127.0.0.1";
 	static int adminserverport = 17538;
 //	static String infopath = "/Users/yidwa/Desktop/";

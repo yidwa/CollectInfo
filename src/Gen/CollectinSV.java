@@ -16,8 +16,8 @@ import org.hyperic.sigar.SigarProxy;
 
 
 //public class CollectinSV implements Serializable, Task<String>{
-public class CollectinSV implements Runnable{	
-
+//public class CollectinSV implements Runnable{	
+	public class CollectinSV {	
 
 	ArrayList<Double> cpu;
 	double mem;
@@ -136,8 +136,9 @@ public class CollectinSV implements Runnable{
 
 	
 
-	@Override
-	public void run() {
+//	@Override
+//	public void run() {
+	public void CollectSending(){
 		// TODO Auto-generated method stub
 		try {
 		//System.out.println("collect info and sending to "+Constants.adminserver);
