@@ -9,7 +9,7 @@ public class CollectingControl {
 	public static void main(String[] args) throws InterruptedException {
 		
 		
-//		ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(5);
+//		ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(10);
 		
 		
 		
@@ -19,8 +19,8 @@ public class CollectingControl {
 				CollectinSV cs = new CollectinSV();
 				cs.CollectSending();
 				}
-			}, 0, 1, TimeUnit.MINUTES);
-//		for (int i = 0; i< 5; i++){
+			}, 0, 5, TimeUnit.MINUTES);
+//		for (int i = 0; i< 10; i++){
 //		//		RMI_client rc = new RMI_client();
 //				CollectinSV cs = new CollectinSV();
 //				scheduledPool.schedule(cs, 0, TimeUnit.SECONDS);

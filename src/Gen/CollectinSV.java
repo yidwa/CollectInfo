@@ -150,6 +150,7 @@ import org.hyperic.sigar.SigarProxy;
 			try {
 				cs = new ClientSending(Constants.adminserver);
 				ClientSending.infoSending(cs.s, temp);
+				System.out.println("sending info "+temp);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("server is not avaible at the moment");
